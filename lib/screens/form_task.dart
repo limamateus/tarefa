@@ -132,6 +132,7 @@ class _FormTaskState extends State<FormTask> {
                                         Text("Tarefa criada com Sucesso!"),
                                 ),
                             );
+                            Navigator.pop(context);
                           }
                         },
                         child: Text("Adicionar")),
