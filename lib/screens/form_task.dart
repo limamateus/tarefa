@@ -1,7 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:tarefa/data/task_inherited.dart';
 
 class FormTask extends StatefulWidget {
-  const FormTask({super.key});
+  const FormTask({required this.taskContext, super.key});
+
+  final BuildContext taskContext;
 
   @override
   State<FormTask> createState() => _FormTaskState();
@@ -123,14 +126,19 @@ class _FormTaskState extends State<FormTask> {
                     child: ElevatedButton(
                         onPressed: () {
                           if (_formKey.currentState!.validate()) {
-                            print(nameController.text);
-                            print(int.parse(difficutyController.text));
-                            print(imageController.text);
+                            //print(nameController.text);
+                            //print(int.parse(difficutyController.text));
+                            // print(imageController.text);
+
+                            TaskInherited.of(widget.taskContext).newTesk(
+                                nameController.text,
+                                imageController.text,
+                                (int.parse(difficutyController.text)));
+
                             ScaffoldMessenger.of(context).showSnackBar(
-                                const SnackBar(
-                                    content:
-                                        Text("Tarefa criada com Sucesso!"),
-                                ),
+                              const SnackBar(
+                                content: Text("Tarefa criada com Sucesso!"),
+                              ),
                             );
                             Navigator.pop(context);
                           }
