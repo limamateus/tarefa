@@ -18,6 +18,23 @@ class _FormTaskState extends State<FormTask> {
 
   @override
   Widget build(BuildContext context) {
+
+    bool difficultyValidator(String? value) {
+      if (value != null && value.isEmpty) {
+        if (int.parse(value) > 5 || int.parse(value) < 1) {
+          return true;
+        }
+      }
+      return false;
+    }
+
+    bool valueValidator(String? value) {
+      if (value != null && value.isEmpty) {
+        return true;
+      }
+      return false;
+    }
+
     return Form(
       key: _formKey,
       child: Scaffold(
@@ -45,7 +62,7 @@ class _FormTaskState extends State<FormTask> {
                     padding: const EdgeInsets.all(8.0),
                     child: TextFormField(
                       validator: (String? value) {
-                        if (value != null && value.isEmpty) {
+                        if (valueValidator(value)) {
                           return 'Insira o nome da Tarefa';
                         }
                       },
@@ -63,9 +80,7 @@ class _FormTaskState extends State<FormTask> {
                     padding: const EdgeInsets.all(8.0),
                     child: TextFormField(
                       validator: (value) {
-                        if (value!.isEmpty ||
-                            (int.parse(value) > 5) ||
-                            (int.parse(value) < 1)) {
+                        if (difficultyValidator(value)) {
                           return 'Informe uma dificultade entre 1 e 5';
                         }
                       },
@@ -87,7 +102,7 @@ class _FormTaskState extends State<FormTask> {
                         setState(() {});
                       },
                       validator: (value) {
-                        if (value!.isEmpty) {
+                        if (valueValidator(value)) {
                           return 'Informe uma url de imagem';
                         }
                       },
