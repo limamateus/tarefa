@@ -17,6 +17,7 @@ class _InitiaScreemState extends State<InitiaScreem> {
       appBar: AppBar(
         backgroundColor: Colors.blue,
         title: const Text('Tarefas'),
+        
       ),
       body: ListView(
         children: TaskInherited.of(context).taskList,
