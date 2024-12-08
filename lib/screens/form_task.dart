@@ -148,7 +148,7 @@ class _FormTaskState extends State<FormTask> {
 
                             TaskDao().save(Task(
                                 nameController.text, imageController.text,
-                                (int.parse(difficutyController.text))));
+                                (int.parse(difficutyController.text)),0));
 
 
                             ScaffoldMessenger.of(context).showSnackBar(

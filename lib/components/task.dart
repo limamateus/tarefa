@@ -7,9 +7,11 @@ class Task extends StatefulWidget {
   final String name;
   final String image;
   final int difficulty;
+  int nivel;
 
-  Task(this.name, this.image, this.difficulty, {super.key});
-  int nivel = 0;
+  Task(this.name, this.image, this.difficulty, this.nivel,{super.key});
+
+
   @override
   State<Task> createState() => _TaskState();
 }
@@ -95,6 +97,7 @@ class _TaskState extends State<Task> {
                         onPressed: () {
                           setState(() {
                             widget.nivel++;
+                            TaskDao().save(Task(widget.name, widget.image, widget.difficulty,widget.nivel));
                           });
                         },
                         child: const Icon(Icons.arrow_drop_up))
