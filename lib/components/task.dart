@@ -1,5 +1,7 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:tarefa/components/difficuty_level.dart';
+import 'package:tarefa/data/task_dao.dart';
 
 class Task extends StatefulWidget {
   final String name;
@@ -67,6 +69,29 @@ class _TaskState extends State<Task> {
                       ],
                     ),
                     ElevatedButton(
+                        onLongPress: () {
+                          showDialog(
+                            context: context,
+                            builder: (BuildContext context) => AlertDialog(
+                              title: const Text('Alerta'),
+                              content: const Text('Deseja excluir essa tarefa?'),
+                              actions: [
+                                TextButton(
+                                  onPressed: () => Navigator.pop(context, 'Não'),
+                                  child: const Text('Não'),
+                                ),
+                                TextButton(
+                                  onPressed: () => {
+                                  TaskDao().delete(widget.name) , Navigator.pop(context, 'Sim')
+
+                                  },
+
+                                  child: const Text('Sim'),
+                                ),
+                              ],
+                            ),
+                          );
+                        },
                         onPressed: () {
                           setState(() {
                             widget.nivel++;

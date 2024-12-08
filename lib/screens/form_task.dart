@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:tarefa/components/task.dart';
+import 'package:tarefa/data/task_dao.dart';
 import 'package:tarefa/data/task_inherited.dart';
 
 class FormTask extends StatefulWidget {
@@ -18,7 +20,6 @@ class _FormTaskState extends State<FormTask> {
 
   @override
   Widget build(BuildContext context) {
-
     bool difficultyValidator(String? value) {
       if (value != null && value.isEmpty) {
         if (int.parse(value) > 5 || int.parse(value) < 1) {
@@ -47,13 +48,13 @@ class _FormTaskState extends State<FormTask> {
               width: 375,
               height: 750,
               decoration: BoxDecoration(
-                  // Decoração do Container
+                // Decoração do Container
                   color: Colors.black12,
                   // Cor do Container
                   borderRadius: BorderRadius.all(Radius.circular(10)),
                   // Arredondamento da Borda do container
                   border: Border.all(width: 3) // tamanho da borda
-                  ),
+              ),
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 crossAxisAlignment: CrossAxisAlignment.center,
@@ -145,10 +146,10 @@ class _FormTaskState extends State<FormTask> {
                             //print(int.parse(difficutyController.text));
                             // print(imageController.text);
 
-                            TaskInherited.of(widget.taskContext).newTesk(
-                                nameController.text,
-                                imageController.text,
-                                (int.parse(difficutyController.text)));
+                            TaskDao().save(Task(
+                                nameController.text, imageController.text,
+                                (int.parse(difficutyController.text))));
+
 
                             ScaffoldMessenger.of(context).showSnackBar(
                               const SnackBar(
